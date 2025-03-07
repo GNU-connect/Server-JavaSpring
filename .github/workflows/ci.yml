@@ -1,9 +1,6 @@
 name: Java CI with Gradle
 
 on:
-  push:
-    branches:
-      - main
   pull_request:
     branches:
       - main
@@ -28,10 +25,3 @@ jobs:
 
       - name: Build with Gradle
         run: ./gradlew build
-
-      # 빌드 결과물을 아티팩트로 업로드 (JAR 파일)
-      - name: Upload JAR Artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: application-jar
-          path: build/libs/*.jar
