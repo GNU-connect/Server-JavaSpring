@@ -1,14 +1,18 @@
 name: Deploy to GCP
 
 on:
-  push:
+  workflow_run:
+    workflows: ["ci"]  # CI 워크플로우 이름
+    types:
+      - completed
     branches:
       - main
-    paths-ignore:
-      - '.github/workflows/**'
 
 jobs:
   deploy:
+    if: >
+      ${{ github.event.workflow_run.event == 'pull_request' &&
+      github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
     permissions:
       id-token: write
