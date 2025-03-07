@@ -49,13 +49,15 @@ jobs:
           service_account: ${{ secrets.SERVICE_ACCOUNT_EMAIL }}
 
       - name: Deploy to GCP Compute Engine
-        uses: google-github-actions/ssh-compute@v1
+        id: 'compute-ssh'
+        uses: 'google-github-actions/ssh-compute@v1'
         with:
           instance_name: ${{ secrets.GCP_INSTANCE_NAME }}
           zone: ${{ secrets.GCP_INSTANCE_ZONE }}
           ssh_private_key: ${{ secrets.GCP_SSH_PRIVATE_KEY }}
           command: |
-            cd /app/${{ github.repository }}
+            mkdir ./${{ github.repository }}
+            cd ./${{ github.repository }}
             sudo curl -o docker-compose.yml https://raw.githubusercontent.com/${{ github.repository }}/main/docker-compose.yml
             sudo docker-compose down
             sudo docker-compose up -d ${{ secrets.DOCKER_IMAGE_NAME }}
