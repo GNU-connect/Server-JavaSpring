@@ -11,7 +11,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor // 기본 생성자 추가
 @AllArgsConstructor // 모든 필드를 초기화하는 생성자 추가
-@Table(name = "kakao-user")
+@Table(name = "user")
 public class UserEntity {
     @Id
     @Column(name = "id")
