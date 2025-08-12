@@ -9,7 +9,7 @@ services:
     environment:
       - spring.config.additional-location=file:/app/application.properties
       - TZ=Asia/Seoul
-      - JAVA_OPTS=-server -Xms512m -Xmx512m -XX:+UseG1GC -XX:+ExitOnOutOfMemoryError -verbose:gc -XX:+PrintGCDetails -XX:+PrintGCTimeStamps -XX:+PrintHeapAtGC -Xloggc:/app/gc.log
+      - JAVA_OPTS=-Xlog:gc*:file=/app/logs/gc.log:time:filecount=7,filesize=8M
     volumes:
       - ./application.properties:/app/application.properties
       - ./logs:/app/logs
